@@ -31,7 +31,6 @@ type ScreenName = 'home' | 'setup' | 'settings' | 'role' | 'game';
 export class App {
   readonly currentScreen = signal<ScreenName>('home');
   readonly homeFooterVisible = signal(true);
-  readonly isLoading = signal(false);
   readonly particlesOptions = signal<ISourceOptions>(this.createParticlesOptions());
 
   readonly particlesInit = async (engine: Engine): Promise<void> => {
@@ -45,7 +44,7 @@ export class App {
   constructor(
     private readonly gameService: GameService,
     private readonly themeService: ThemeService,
-    private readonly translationService: TranslationService
+    private readonly translationService: TranslationService,
     public readonly loaderService: LoaderService
   ) {
     this.themeService.loadTheme();
@@ -57,8 +56,7 @@ export class App {
     });
 
     // Show loader on page load
-    this.showLoader();
-    setTimeout(() => this.hideLoader(), 1000);
+    this.loaderService.showLoader(1000);
   }
 
   showScreen(screen: ScreenName): void {
@@ -84,14 +82,6 @@ export class App {
 
   setHomeFooterVisible(isVisible: boolean): void {
     this.homeFooterVisible.set(isVisible);
-  }
-
-  showLoader(): void {
-    this.isLoading.set(true);
-  }
-
-  hideLoader(): void {
-    this.isLoading.set(false);
   }
 
   private createParticlesOptions(): ISourceOptions {
