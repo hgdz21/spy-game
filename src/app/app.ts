@@ -54,24 +54,17 @@ export class App {
       this.particlesOptions.set(this.createParticlesOptions());
     });
 
-    // Add global click handler for loader
-    document.addEventListener('click', (event) => {
-      const target = event.target as HTMLElement;
-      // Show loader on button clicks, input changes, etc
-      if (
-        target.tagName === 'BUTTON' ||
-        target.closest('button') ||
-        target.tagName === 'A' ||
-        target.closest('a')
-      ) {
-        this.showLoader();
-        // Auto-hide loader after 800ms
-        setTimeout(() => this.hideLoader(), 800);
-      }
-    });
+    // Show loader on page load
+    this.showLoader();
+    setTimeout(() => this.hideLoader(), 1000);
   }
 
   showScreen(screen: ScreenName): void {
+    // Show loader when starting the game (after role reveal)
+    if (screen === 'game') {
+      this.showLoader();
+      setTimeout(() => this.hideLoader(), 1000);
+    }
     this.currentScreen.set(screen);
   }
 

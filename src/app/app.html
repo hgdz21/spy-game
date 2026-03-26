@@ -10,7 +10,10 @@
 @if (isLoading()) {
 <div class="loader-overlay" [class.active]="isLoading()">
   <div class="loader-content">
-    <img src="favicon.png" alt="Loading" class="loader-logo" />
+    <div class="spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+    </div>
   </div>
 </div>
 }
