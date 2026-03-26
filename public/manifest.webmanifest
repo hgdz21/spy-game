@@ -8,6 +8,21 @@
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
+  "id": "/spy-game",
+  "screenshots": [
+    {
+      "src": "icons/launchericon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "icons/launchericon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
   "icons": [
     {
       "src": "icons/launchericon-48x48.png",
