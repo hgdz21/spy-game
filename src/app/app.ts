@@ -5,6 +5,7 @@ import { loadSlim } from '@tsparticles/slim';
 import { GameService } from './core/services/game.service';
 import { ThemeService } from './core/services/theme.service';
 import { TranslationService } from './core/services/translation.service';
+import { LoaderService } from './core/services/loader.service';
 import { GameComponent } from './features/board/game.component';
 import { HomeComponent } from './features/home/home.component';
 import { SettingsComponent } from './features/settings/settings.component';
@@ -45,6 +46,7 @@ export class App {
     private readonly gameService: GameService,
     private readonly themeService: ThemeService,
     private readonly translationService: TranslationService
+    public readonly loaderService: LoaderService
   ) {
     this.themeService.loadTheme();
     this.translationService.loadLanguage();
@@ -62,10 +64,16 @@ export class App {
   showScreen(screen: ScreenName): void {
     // Show loader when starting the game (after role reveal)
     if (screen === 'game') {
-      this.showLoader();
-      setTimeout(() => this.hideLoader(), 1000);
+      this.loaderService.showLoader(1000);
     }
     this.currentScreen.set(screen);
+  }
+
+  onLanguageChanged(): void {
+    // Ensure loader shows with a small delay
+    setTimeout(() => {
+      this.loaderService.showLoader(1500);
+    }, 50);
   }
 
   showHomeScreen(): void {

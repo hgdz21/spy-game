@@ -7,8 +7,8 @@
 </div>
 
 <!-- Global Loader Overlay -->
-@if (isLoading()) {
-<div class="loader-overlay" [class.active]="isLoading()">
+@if (loaderService.isLoading()) {
+<div class="loader-overlay" [class.active]="loaderService.isLoading()">
   <div class="loader-content">
     <div class="spinner">
       <div class="double-bounce1"></div>

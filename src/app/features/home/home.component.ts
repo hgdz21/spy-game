@@ -5,6 +5,7 @@ import {
   ThemeCategoryKey,
   TranslationService
 } from '../../core/services/translation.service';
+import { LoaderService } from '../../core/services/loader.service';
 
 type HomeView = 'home' | 'howto' | 'locations';
 
@@ -35,7 +36,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public readonly gameService: GameService,
-    public readonly translationService: TranslationService
+    public readonly translationService: TranslationService,
+    private readonly loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +73,7 @@ export class HomeComponent implements OnInit {
   setLanguage(language: LanguageCode): void {
     this.translationService.setLanguage(language);
     this.isLanguageMenuOpen.set(false);
+    this.loaderService.showLoader(1500);
   }
 
   currentLanguageOption(): { code: LanguageCode; label: string; flagSrc: string } {
