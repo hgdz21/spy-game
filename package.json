@@ -28,6 +28,7 @@
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
+    "@angular/service-worker": "^20.3.0",
     "@tsparticles/angular": "^3.0.0",
     "@tsparticles/slim": "^3.9.1",
     "flag-icons": "^7.5.0",
