@@ -1,0 +1,35 @@
+<div id="game-screen" class="screen active">
+    <div class="container">
+        <div class="game-header">
+            <div class="timer-display">
+                <div class="timer-circle">
+                    <span id="timer">{{ gameService.timerText() }}</span>
+                </div>
+            </div>
+            <div class="location-info hidden" id="location-info">
+                <p class="location-label">{{ t('location') }}</p>
+                <h3 id="location-display">{{ translationService.translateLocation(gameService.state().location) }}</h3>
+            </div>
+        </div>
+
+        <div class="game-info">
+            <p>👥 {{ t('players') }}: <span id="game-player-count">{{ gameService.state().playerCount }}</span></p>
+            <p>🕵️ {{ t('spies') }}: <span id="game-spy-count">{{ gameService.state().spyCount }}</span></p>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-danger" (click)="showEndGameModal()">{{ t('endGame') }}</button>
+        </div>
+    </div>
+</div>
+
+<div id="confirm-modal" class="modal hidden" [class.hidden]="!showConfirmModal">
+    <div class="modal-overlay" (click)="hideConfirmModal()"></div>
+    <div class="modal-content">
+        <h3 id="modal-title">{{ t('endGameConfirm') }}</h3>
+        <div class="modal-buttons">
+            <button class="btn btn-danger" (click)="confirmEndGame()">{{ t('endGame') }}</button>
+            <button class="btn btn-secondary" (click)="hideConfirmModal()">{{ t('cancel') }}</button>
+        </div>
+    </div>
+</div>

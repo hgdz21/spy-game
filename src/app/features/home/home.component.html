@@ -1,0 +1,103 @@
+@if (view() === 'home') {
+<div id="home-screen" class="screen active">
+    <div class="container">
+        <header class="home-topbar">
+            <div class="lang-switcher">
+                <button type="button" class="topbar-icon-btn" (click)="toggleLanguageMenu()" aria-label="Language">
+                    <img class="lang-flag-img" [src]="currentLanguageOption().flagSrc"
+                        [alt]="currentLanguageOption().label + ' flag'" />
+                </button>
+
+                @if (isLanguageMenuOpen()) {
+                <div class="lang-dropdown">
+                    @for (option of languageOptions; track option.code) {
+                    <button type="button" class="lang-option" (click)="setLanguage(option.code)">
+                        <img class="lang-flag-img" [src]="option.flagSrc" [alt]="option.label + ' flag'" />
+                        <span>{{ option.label }}</span>
+                    </button>
+                    }
+                </div>
+                }
+            </div>
+
+            <button type="button" class="topbar-icon-btn" (click)="showHowToPlay()" aria-label="How to play">
+                <span class="help-icon">❓</span>
+            </button>
+        </header>
+
+        <div class="home-hero">
+            <div class="logo">
+                <h1 class="logo-title">{{ t('appTitle') }}</h1>
+                <p class="subtitle">{{ t('subtitle') }}</p>
+            </div>
+
+            <div class="button-group home-main-actions">
+                <button class="btn btn-primary" (click)="startGame.emit()">{{ t('startGame') }}</button>
+                <button class="btn btn-secondary btn-small" (click)="openSettings.emit()">{{ t('settings') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+@if (view() === 'howto') {
+<div id="howtoplay-screen" class="screen active">
+    <div class="container">
+        <h2>{{ t('howToPlayTitle') }}</h2>
+        <div class="info-card">
+            <div class="info-section">
+                <h3>{{ t('objective') }}</h3>
+                <p><strong>{{ t('spiesObj') }}</strong></p>
+                <p><strong>{{ t('playersObj') }}</strong></p>
+            </div>
+            <div class="info-section">
+                <h3>{{ t('setupTitle') }}</h3>
+                <p>{{ t('setup1') }}</p>
+                <p>{{ t('setup2') }}</p>
+                <p>{{ t('setup3') }}</p>
+            </div>
+            <div class="info-section">
+                <h3>{{ t('gameplayTitle') }}</h3>
+                <p>• {{ t('gameplay1') }}</p>
+                <p>• {{ t('gameplay2') }}</p>
+                <p>• {{ t('gameplay3') }}</p>
+                <p>• {{ t('gameplay4') }}</p>
+            </div>
+            <div class="info-section">
+                <h3>{{ t('winningTitle') }}</h3>
+                <p>• {{ t('winning1') }}</p>
+                <p>• {{ t('winning2') }}</p>
+            </div>
+        </div>
+        <button class="btn btn-primary" (click)="showHome()">{{ t('gotIt') }}</button>
+    </div>
+</div>
+}
+
+@if (view() === 'locations') {
+<div id="locations-screen" class="screen active">
+    <div class="container">
+        <h2>{{ t('locationsTitle') }}</h2>
+        <div id="locations-list">
+            @for (category of gameService.themeCategories; track category.id) {
+            <div class="locations-category-block">
+                <button type="button" class="locations-category-toggle"
+                    [class.expanded]="isCategoryExpanded(category.id)" (click)="toggleCategory(category.id)">
+                    <span class="locations-category-title">{{ category.emoji }} {{ categoryTitle(category) }}</span>
+                    <span class="locations-category-chevron">⌄</span>
+                </button>
+
+                @if (isCategoryExpanded(category.id)) {
+                <div class="locations-grid">
+                    @for (item of category.items; track item) {
+                    <div class="location-item">{{ categoryItemLabel(item) }}</div>
+                    }
+                </div>
+                }
+            </div>
+            }
+        </div>
+        <button class="btn btn-primary" (click)="showHome()">{{ t('back') }}</button>
+    </div>
+</div>
+}

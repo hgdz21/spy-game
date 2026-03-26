@@ -1,0 +1,44 @@
+<div class="app-background" aria-hidden="true">
+  <ngx-particles
+    id="spy-network"
+    [options]="particlesOptions()"
+    [particlesInit]="particlesInit"
+  />
+</div>
+
+<div class="app-content">
+@if (currentScreen() === 'home') {
+  <app-home
+    (startGame)="showScreen('setup')"
+    (openSettings)="showScreen('settings')"
+    (footerVisibleChange)="setHomeFooterVisible($event)"
+  />
+}
+
+@if (currentScreen() === 'setup') {
+  <app-setup
+    (cancel)="showHomeScreen()"
+    (startRoles)="showScreen('role')"
+  />
+}
+
+@if (currentScreen() === 'role') {
+  <app-role-reveal (rolesCompleted)="showScreen('game')" />
+}
+
+@if (currentScreen() === 'game') {
+  <app-game (exitGame)="showHomeScreen()" />
+}
+
+@if (currentScreen() === 'settings') {
+  <app-settings
+    (saved)="showHomeScreen()"
+    (cancel)="showHomeScreen()"
+  />
+}
+
+
+<footer class="footer" [style.display]="shouldShowFooter() ? 'block' : 'none'">
+  <p>Powered by: <a href="https://linktr.ee/hamza_gadouche" target="_blank" rel="noopener noreferrer">HG</a></p>
+</footer>
+</div>

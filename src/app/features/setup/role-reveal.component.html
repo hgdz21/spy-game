@@ -1,0 +1,38 @@
+<div id="role-screen" class="screen active">
+    <div class="container">
+        <div class="role-counter">
+            <p>
+                {{ t('playerOf') }} <span id="current-player">{{ gameService.state().currentPlayer }}</span>
+                {{ t('of') }} <span id="total-players">{{ gameService.state().playerCount }}</span>
+            </p>
+        </div>
+
+        <div
+            class="role-card tactile-role-card"
+            id="role-card"
+            role="button"
+            tabindex="0"
+            [attr.aria-disabled]="isTransitioning()"
+            (click)="handleCardTap()"
+            (keydown)="handleCardKeydown($event)"
+        >
+            <div class="flip-card" [class.is-flipped]="isFlipped()" [class.is-busy]="isTransitioning()">
+                <div class="flip-card-inner">
+                    <div class="flip-card-face flip-card-front">
+                        <!-- <p class="front-player-label">{{ t('player') }} {{ gameService.state().currentPlayer }}</p> -->
+                        <p class="front-tap-label">{{ t('tapCard') }}</p>
+                    </div>
+
+                    <div class="flip-card-face flip-card-back">
+                        @if (gameService.isCurrentPlayerSpy()) {
+                            <div class="role-spy">🕵️ {{ t('youAreSpy') }}</div>
+                        } @else {
+                            <p class="role-player">{{ t('locationIs') }}</p>
+                            <div class="role-location">{{ translationService.translateLocation(gameService.state().location) }}</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

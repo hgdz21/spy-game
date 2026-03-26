@@ -1,0 +1,98 @@
+:host {
+  display: block;
+}
+
+.tactile-role-card {
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  border-radius: 22px;
+}
+
+.tactile-role-card:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 60%, transparent);
+}
+
+.flip-card {
+  width: 100%;
+  min-height: 420px;
+  perspective: 1400px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.52s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.flip-card.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 65%, transparent);
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+.flip-card-front {
+  transform: rotateY(0deg);
+  background:
+    radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--color-primary) 35%, transparent), transparent 40%),
+    radial-gradient(circle at 85% 80%, color-mix(in srgb, var(--color-secondary) 24%, transparent), transparent 45%),
+    color-mix(in srgb, var(--bg-card) 88%, transparent);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.flip-card.is-busy {
+  pointer-events: none;
+}
+
+.front-player-label {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.9rem;
+}
+
+.front-tap-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--text-secondary) 90%, white 10%);
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 72%, transparent);
+  background: color-mix(in srgb, var(--bg-primary) 55%, transparent);
+}
+
+.role-spy {
+  font-size: 1.9rem;
+  color: var(--color-spy);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--color-spy) 45%, transparent);
+}
+
+.role-player {
+  color: var(--text-secondary);
+}
+
+.role-location {
+  color: var(--color-player);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--color-player) 35%, transparent);
+}

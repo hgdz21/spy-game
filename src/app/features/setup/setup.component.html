@@ -1,0 +1,44 @@
+<div id="setup-screen" class="screen active">
+    <div class="container">
+        <h2>{{ t('setupTitle2') }}</h2>
+        <div class="setup-card">
+            <div class="input-group">
+                <label for="player-count">{{ t('playersLabel') }}</label>
+                <div class="number-input">
+                    <button class="btn-circle" (click)="gameService.decrementPlayers()">−</button>
+                    <input type="number" id="player-count" min="3" max="12" [value]="gameService.state().playerCount"
+                        readonly>
+                    <button class="btn-circle" (click)="gameService.incrementPlayers()">+</button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="spy-count">{{ t('spiesLabel') }}</label>
+                <div class="number-input">
+                    <button class="btn-circle" (click)="gameService.decrementSpies()">−</button>
+                    <input type="number" id="spy-count" min="1" max="2" [value]="gameService.state().spyCount" readonly>
+                    <button class="btn-circle" (click)="gameService.incrementSpies()">+</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>{{ t('chooseCategory') }}</label>
+                <div class="category-grid">
+                    @for (category of gameService.themeCategories; track category.id) {
+                    <button
+                        type="button"
+                        class="category-card"
+                        [class.selected]="isSelectedCategory(category.id)"
+                        (click)="selectCategory(category.id)"
+                    >
+                        <span class="category-emoji">{{ category.emoji }}</span>
+                        <span class="category-name">{{ categoryName(category) }}</span>
+                    </button>
+                    }
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary" (click)="startRoleAssignment()">{{ t('startRole') }}</button>
+        <div style="height: 1rem;"></div>
+        <button class="btn btn-secondary" (click)="cancel.emit()">{{ t('cancel') }}</button>
+    </div>
+</div>
