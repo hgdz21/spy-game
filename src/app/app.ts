@@ -30,6 +30,7 @@ type ScreenName = 'home' | 'setup' | 'settings' | 'role' | 'game';
 export class App {
   readonly currentScreen = signal<ScreenName>('home');
   readonly homeFooterVisible = signal(true);
+  readonly isLoading = signal(false);
   readonly particlesOptions = signal<ISourceOptions>(this.createParticlesOptions());
 
   readonly particlesInit = async (engine: Engine): Promise<void> => {
@@ -52,6 +53,22 @@ export class App {
       this.themeService.isDarkMode();
       this.particlesOptions.set(this.createParticlesOptions());
     });
+
+    // Add global click handler for loader
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      // Show loader on button clicks, input changes, etc
+      if (
+        target.tagName === 'BUTTON' ||
+        target.closest('button') ||
+        target.tagName === 'A' ||
+        target.closest('a')
+      ) {
+        this.showLoader();
+        // Auto-hide loader after 800ms
+        setTimeout(() => this.hideLoader(), 800);
+      }
+    });
   }
 
   showScreen(screen: ScreenName): void {
@@ -66,6 +83,14 @@ export class App {
 
   setHomeFooterVisible(isVisible: boolean): void {
     this.homeFooterVisible.set(isVisible);
+  }
+
+  showLoader(): void {
+    this.isLoading.set(true);
+  }
+
+  hideLoader(): void {
+    this.isLoading.set(false);
   }
 
   private createParticlesOptions(): ISourceOptions {
