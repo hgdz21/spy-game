@@ -21,16 +21,17 @@
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
     
-    /* Brand Colors */
-    --color-primary: #667eea;
-    --color-primary-dark: #5a67d8;
+    /* Brand Colors - New Red Identity */
+    --color-primary: #d41212;
+    --color-primary-dark: #ac0e0e;
+    --color-primary-light: #e55a5a;
     --color-secondary: #48bb78;
-    --color-danger: #f56565;
-    --color-danger-dark: #e53e3e;
+    --color-danger: #d41212;
+    --color-danger-dark: #ac0e0e;
     --color-warning: #ed8936;
     
     /* Spy Colors */
-    --color-spy: #e53e3e;
+    --color-spy: #d41212;
     --color-player: #48bb78;
 }
 
@@ -199,7 +200,7 @@ p {
 }
 
 .btn-reveal {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #d41212, #ac0e0e);
     color: white;
     font-size: 1.25rem;
     padding: 1.5rem;
@@ -507,7 +508,7 @@ input:checked + .slider:before {
     height: 180px;
     margin: 0 auto;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    background: linear-gradient(135deg, #d41212, #ac0e0e);
     display: flex;
     align-items: center;
     justify-content: center;
